@@ -5,6 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>COZIEST</title>
 <link rel="stylesheet" href="Design.css">
+<style>
+/* Add to Cart Button Styles */
+.add-to-cart-btn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #218838;
+}
+
+/* Cart Summary Styles */
+.cart-summary {
+  margin-top: 30px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  width: fit-content;
+}
+</style>
 </head>
 <body>
 
@@ -68,6 +94,12 @@
                         <h4>STICKERS</h4>
                         <p>0PHP</p>
                     </div>
+                    <button class="add-to-cart-btn"
+                            data-id="1"
+                            data-name="STICKERS"
+                            data-price="0">
+                        Add to Cart
+                    </button>
                 </div>
 
                 <div class="unit-card">
@@ -76,6 +108,12 @@
                         <h4>MUGS</h4>
                         <p>0PHP</p>
                     </div>
+                    <button class="add-to-cart-btn"
+                            data-id="2"
+                            data-name="MUGS"
+                            data-price="0">
+                        Add to Cart
+                    </button>
                 </div>
 
                 <div class="unit-card">
@@ -84,6 +122,12 @@
                         <h4>POLAROID</h4>
                         <p>0PHP</p>
                     </div>
+                    <button class="add-to-cart-btn"
+                            data-id="3"
+                            data-name="POLAROID"
+                            data-price="0">
+                        Add to Cart
+                    </button>
                 </div>
 
                 <div class="unit-card">
@@ -92,7 +136,19 @@
                         <h4>PRINT</h4>
                         <p>0PHP</p>
                     </div>
+                    <button class="add-to-cart-btn"
+                            data-id="4"
+                            data-name="PRINT"
+                            data-price="0">
+                        Add to Cart
+                    </button>
                 </div>
+            </div>
+
+            <!-- Cart Summary -->
+            <div class="cart-summary">
+              <h3>Your Cart (<span id="cart-count">0</span>)</h3>
+              <ul id="cart-items"></ul>
             </div>
 
         </section>
@@ -101,5 +157,27 @@
 
 </div>
 
+<script>
+  const cartCount = document.getElementById("cart-count");
+  const cartItems = document.getElementById("cart-items");
+  const buttons = document.querySelectorAll(".add-to-cart-btn");
+
+  let count = 0;
+
+  buttons.forEach(button => {
+    button.addEventListener("click", () => {
+      const name = button.getAttribute("data-name");
+      const price = button.getAttribute("data-price");
+
+      const li = document.createElement("li");
+      li.textContent = name + " - " + price + "PHP";
+      cartItems.appendChild(li);
+
+      count++;
+      cartCount.textContent = count;
+    });
+  });
+</script>
+
 </body>
-</html>
+                    </html>
