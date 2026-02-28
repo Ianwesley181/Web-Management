@@ -5,6 +5,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>COZIEST</title>
 <link rel="stylesheet" href="Design.css">
+<style>
+/* Add to Cart Button Styles */
+.add-to-cart-btn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #218838;
+}
+
+/* Cart Summary Styles */
+.cart-summary {
+  margin-top: 30px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  width: fit-content;
+}
+</style>
 </head>
 <body>
 
@@ -95,11 +119,51 @@
                 </div>
             </div>
 
+            <!-- Add to Cart Products -->
+            <div class="product-card">
+              <img src="product-image.jpg" alt="Cool Shirt" width="150">
+              <h3>Classic White Tee</h3>
+              <p class="price">$25.00</p>
+              <button class="add-to-cart-btn" 
+                      data-id="1" 
+                      data-name="Classic White Tee" 
+                      data-price="25.00">
+                Add to Cart
+              </button>
+            </div>
+
+            <div class="cart-summary">
+              <h3>Your Cart (<span id="cart-count">0</span>)</h3>
+              <ul id="cart-items"></ul>
+            </div>
+
         </section>
 
     </main>
 
 </div>
+
+<script>
+  const cartCount = document.getElementById("cart-count");
+  const cartItems = document.getElementById("cart-items");
+  const buttons = document.querySelectorAll(".add-to-cart-btn");
+
+  let count = 0;
+
+  buttons.forEach(button => {
+    button.addEventListener("click", () => {
+      const name = button.getAttribute("data-name");
+      const price = button.getAttribute("data-price");
+
+      const li = document.createElement("li");
+      li.textContent = name + " - $" + price;
+      cartItems.appendChild(li);
+
+      count++;
+      cartCount.textContent = count;
+    });
+  });
+</script>
 
 </body>
 </html>
